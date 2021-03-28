@@ -17,7 +17,7 @@ xval = np.array(data.iloc[:,0])
 
 yval = np.array(data.iloc[:,1])
 
-# sp = pyspeckit.Spectrum(data=yval, xarr=xval)
+sp = pyspeckit.Spectrum(data=yval, xarr=xval)
 
 #
 flux=yval

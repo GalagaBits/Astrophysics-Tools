@@ -17,7 +17,7 @@ xval = np.array(data.iloc[:,0])
 
 yval = np.array(data.iloc[:,1])
 
-# sp = pyspeckit.Spectrum(data=yval, xarr=xval)
+sp = pyspeckit.Spectrum(data=yval, xarr=xval)
 
 #
 flux=yval
@@ -47,6 +47,7 @@ sp.plotter(color='black',xmin=0.0e7, xmax=0.010e7 ,ymin=0.99900, ymax=1.00075,fi
 
 pl.xlabel('Time (s)', fontname="Times New Roman")
 pl.ylabel('Normalized Flux',fontname="Times New Roman")
+pl.show()
 
 sp.baseline(interactive=True, subtract=False)
 
