@@ -26,7 +26,7 @@ t1 = 0
 t2 = 9.12E3
 
 
-#function from unutbu on Stack
+#function pulled from the user "unutbu" on overflow on Stack
 def nearest_index(array, value):
     array = np.asarray(array)
     idx = np.abs(array - value).argmin()
@@ -41,19 +41,19 @@ def transit_std(flux, t1, t2):
 
 
 #Plot the First Transit
-'''
+
 import pylab as pl
 
-fig = pl.figure(figsize=(8,6))
-sp.plotter(color='black',xmin=0.0e7, xmax=0.010e7 ,ymin=0.99900, ymax=1.00075,figure=fig)
+# fig = pl.figure(figsize=(8,6))
+# sp.plotter(color='black',xmin=0.0e7, xmax=0.010e7 ,ymin=0.99900, ymax=1.00075,figure=fig)
 
-pl.xlabel('Time (s)', fontname="Times New Roman")
-pl.ylabel('Normalized Flux',fontname="Times New Roman")
-
-# sp.baseline(interactive=True, subtract=False)
+# pl.xlabel('Time (s)', fontname="Times New Roman")
+# pl.ylabel('Normalized Flux',fontname="Times New Roman")
+# pl.show()
+# # sp.baseline(interactive=True, subtract=False)
 
 # sp.specfit(interactive=True)
-'''
+
 
 #Overplot Transits with Phase shifts
 
@@ -76,9 +76,6 @@ Notes to self
 '''
 import pylab as pl
 from astropy.timeseries import TimeSeries
-from astropy.utils.data import get_pkg_data_filename
-
-from astropy.timeseries import BinnedTimeSeries
 
 '''
 From astropy...
@@ -94,53 +91,53 @@ Parameters
     fold(period=None, epoch_time=None, epoch_phase=0, wrap_phase=None,
          normalize_phase=False)[source]
 '''
-'''
-binned_filename = get_pkg_data_filename('/Users/dealderod/Documents/Number10_1.csv',
-                                         package='astropy.timeseries.tests')
-ts = BinnedTimeSeries.read('/Users/dealderod/Documents/Number10_1.csv', format='ascii.csv', time_bin_start_column='time_start',
-                           time_bin_size_column='bin_size',
-                           time_bin_size_unit=u.s)
-'''
-data = np.concatenate([xval,yval])
 
-orbital_period = 597.8 #days
+#transit1 = yval[nearest_index(xval, -15300):nearest_index(xval, 24700)]
+transit2 = yval[nearest_index(xval, 2380000):nearest_index(xval, 2420000)]
+# transit3 = yval[nearest_index(xval, 4780000):nearest_index(xval, 4820000)]
+# transit4 = yval[nearest_index(xval, 7170000):nearest_index(xval, 7210000)]
+# transit5 = yval[nearest_index(xval, 9570000):nearest_index(xval, 9610000)]
+
+orbital_period = 27.7435 #days
 
 
-ts = TimeSeries(time_start='2016-03-22T12:30:31',
-                time_delta=7.1889609587E+01 * u.s,
-                data={'normalized flux': yval})
-
-ts_folded = ts.fold(period=51649920*u.s) 
-pl.plot(ts_folded.time.jd, ts_folded['normalized flux'], 'k.', markersize=1) 
-pl.show()
-print(ts)
-'''
-sampled_filename = get_pkg_data_filename('/Users/dealderod/Documents/Number10_1.csv',
-                                         package='astropy.timeseries.tests')
-
-ts = TimeSeries.read(sampled_filename, format='ascii.csv',
-                     time_column='Date')
-
-orbital_period = 597.8 #days
-'''
+# ts1 = TimeSeries(time_start='2000-01-01T00:00:00',
+#                 time_delta=7.1889609587E+01 * u.s,
+#                 data={'normalized flux': transit1})
 
 
+ts2 = TimeSeries(time_start='2000-02-25T11:41:16.000',
+                 time_delta=7.1889609587E+01 * u.s,
+                 data={'normalized flux': transit2})
 
-def gaussian(xval, a, FWHM, rest_f):
-    return (a*(np.exp(-np.log(2)*(((xval-rest_f)**2)/((0.5*FWHM)**2)))))
+# ts3 = TimeSeries(time_start='2000-02-25T11:41:16.000',
+#                 time_delta=7.1889609587E+01 * u.s,
+#                 data={'normalized flux': transit3})
 
-a_1,a_2,a_3,a_4,a_5      = -0.00061,-0.00057,-0.00062,-0.00052,-0.00056
-w_1,w_2,w_3,w_4,w_5      =3.78e3,3e3,3.3e3,3.1e3,3.1e3
-x = np.linspace(-5,5,10)
+# ts4 = TimeSeries(time_start='2000-02-25T11:41:16.000',
+#                 time_delta=7.1889609587E+01 * u.s,
+#                 data={'normalized flux': transit4})
 
-pl.plot(x, gaussian(x,a_1,w_2,0), color="blue")
-# pl.plot(x, gaussian(x,a_2,w_2,0), color="yellow")
-# pl.plot(x, gaussian(x,a_3,w_3,0), color="orange")
-# pl.plot(x, gaussian(x,a_4,w_4,0), color="red")
-# pl.plot(x, gaussian(x,a_5,w_5,0), color="green")
-pl.show()
-# def transit_std(flux, t1, t2):
-#     t_start, t_end = (find_nearest(flux, t1),
-#                       find_nearest(flux, t2))
-#     transit = data[t_start:t_end]
-#     np.std(transit)
+# ts5 = TimeSeries(time_start='2000-02-25T11:41:16.000',
+#                 time_delta=7.1889609587E+01 * u.s,
+#                 data={'normalized flux': transit5})
+
+
+
+# ts1_folded = ts1.fold(period=2397038*u.s, epoch_time='2000-01-28T17:50:38.000')
+ts2_folded = ts2.fold(period=2397038*u.s, epoch_time='2000-02-25T11:41:16.000')
+# ts3_folded = ts3.fold(period=2397038*u.s, epoch_time='2000-03-24T05:31:54.000')
+# ts4_folded = ts4.fold(period=2397038*u.s, epoch_time='2000-04-20T23:22:32.000')
+# ts5_folded = ts5.fold(period=2397038*u.s, epoch_time='2000-05-18T17:13:10.000')
+
+def gaussian(xval, a, sigma, time):
+    return (a*(np.exp(-np.log(2)*(((xval-time)**2)/((0.5*(sigma*np.sqrt(8*np.log(2))))**2)))))
+
+pl.plot(ts2_folded.time.jd, gaussian(ts2_folded.time.jd,-0.00057,3e3,0), color="blue")
+
+# pl.plot(ts1_folded.time.jd, ts1_folded['normalized flux'], 'k.', markersize=1, drawstyle='steps-pre')
+pl.plot(ts2_folded.time.jd, ts2_folded['normalized flux'], 'b-', markersize=1, drawstyle='steps-pre')
+# pl.plot(ts3_folded.time.jd, ts3_folded['normalized flux'], 'g-', markersize=1, drawstyle='steps-pre')
+# pl.plot(ts4_folded.time.jd, ts4_folded['normalized flux'], 'r-', markersize=1, drawstyle='steps-pre')
+# pl.plot(ts4_folded.time.jd, ts4_folded['normalized flux'], 'y-', markersize=1, drawstyle='steps-pre')
+pl.show() 
