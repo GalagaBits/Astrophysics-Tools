@@ -68,7 +68,7 @@ ts_folded = ts.fold(period=orbital_period*u.s)
 
 a_1,a_2,a_3,a_4,a_5      = -0.00061,-0.00057,-0.00062,-0.00052,-0.00056
 w_1,w_2,w_3,w_4,w_5      =3.78e3,3e3,3.3e3,3.1e3,3.1e3
-x = np.linspace(-100000*7.1889609587E+01,100000*7.1889609587E+01)
+x = np.linspace(-100000*7.1889609587E+01,100000*7.1889609587E+01,10000000)
 pl.plot(x, gaussian(x,a_1,w_1,0), color="blue")
 pl.plot(x, gaussian(x,a_2,w_2,0), color="red")
 pl.plot(x, gaussian(x,a_3,w_3,0), color="yellow")
