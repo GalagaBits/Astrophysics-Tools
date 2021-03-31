@@ -22,7 +22,6 @@ def nearest_index(array, value):
     idx = np.abs(array - value).argmin()
     return idx
 
-
 def transit_std(flux, t1, t2):
     t_start, t_end = (nearest_index(xval, t1),
                       nearest_index(xval, t2))
@@ -54,17 +53,6 @@ pl.ylabel('Normalized Flux',fontname="Times New Roman")
 #Overplot Transits with Phase shifts
 
 import pylab as pl
-from astropy.timeseries import TimeSeries
-
-
-orbital_period = 27.7435 #days
-
-
-ts = TimeSeries(time_start='2016-03-22T12:30:31',
-                time_delta=7.1889609587E+01 * u.s,
-                data={'normalized flux': yval})
-
-ts_folded = ts.fold(period=orbital_period*u.s) 
 
 a_1,a_2,a_3,a_4,a_5      = -0.00061,-0.00057,-0.00062,-0.00052,-0.00056
 w_1,w_2,w_3,w_4,w_5      =3.78e3,3e3,3.3e3,3.1e3,3.1e3
@@ -75,7 +63,7 @@ pl.plot(x, gaussian(x,a_3,w_3,0), color="yellow")
 pl.plot(x, gaussian(x,a_4,w_4,0), color="orange")
 pl.plot(x, gaussian(x,a_5,w_5,0), color="green")
 
+pl.title('Period Folding of Gaussian Fit Transits', fontname="Times New Roman")
 pl.xlabel('Time (s)', fontname="Times New Roman")
 pl.ylabel('Normalized Flux',fontname="Times New Roman")
-
 pl.show()
