@@ -122,8 +122,9 @@ pl.plot(ts4_folded.time.jd, ts4_folded['normalized flux'], 'mx', markersize=2, d
 #pl.title('Period Folding of Gaussian Fit Transits', fontname="Times New Roman")
 pl.xlabel('Phase (s)', fontname="Times New Roman")
 pl.ylabel('Normalized Flux',fontname="Times New Roman")
-pl.savefig("/Users/dealderod/Documents/GitHub/Astrophysics-Tools/Plots")
 pl.legend()
+pl.savefig("/Users/dealderod/Documents/GitHub/Astrophysics-Tools/Plots/Transits_Folding")
+
 pl.show() 
 
 
