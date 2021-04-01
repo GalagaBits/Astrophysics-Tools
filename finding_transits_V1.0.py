@@ -53,7 +53,7 @@ pl.ylabel('Normalized Flux',fontname="Times New Roman")
 #Overplot Transits with Phase shifts
 
 import pylab as pl
-
+'''
 a_1,a_2,a_3,a_4,a_5      = -0.00061,-0.00057,-0.00062,-0.00052,-0.00056
 w_1,w_2,w_3,w_4,w_5      =3.78e3,3e3,3.3e3,3.1e3,3.1e3
 x = np.linspace(-100000*7.1889609587E+01,100000*7.1889609587E+01,10000000)
@@ -67,3 +67,76 @@ pl.title('Period Folding of Gaussian Fit Transits', fontname="Times New Roman")
 pl.xlabel('Time (s)', fontname="Times New Roman")
 pl.ylabel('Normalized Flux',fontname="Times New Roman")
 pl.show()
+'''
+#Overplot Observations
+
+import pylab as pl
+from astropy.timeseries import TimeSeries
+
+
+transit1 = yval[nearest_index(xval, -15300):nearest_index(xval, 24700)]
+transit2 = yval[nearest_index(xval, 2380000):nearest_index(xval, 2420000)]
+transit3 = yval[nearest_index(xval, 4780000):nearest_index(xval, 4820000)]
+transit4 = yval[nearest_index(xval, 7170000):nearest_index(xval, 7210000)]
+transit5 = yval[nearest_index(xval, 9570000):nearest_index(xval, 9610000)]
+
+orbital_period = 27.7435 #days
+
+
+ts1 = TimeSeries(time_start='2000-01-01T00:00:00.000',
+                time_delta=7.1889609587E+01 * u.s,
+                data={'normalized flux': transit1})
+
+
+ts2 = TimeSeries(time_start='1999-12-31T19:45:00.000',
+                 time_delta=7.1889609587E+01 * u.s,
+                 data={'normalized flux': transit2})
+
+ts3 = TimeSeries(time_start='2000-01-28T14:51:38.000',
+                time_delta=7.1889609587E+01 * u.s,
+                data={'normalized flux': transit3})
+
+ts4 = TimeSeries(time_start='2000-02-25T07:03:16.000',
+                time_delta=7.1889609587E+01 * u.s,
+                data={'normalized flux': transit4})
+
+ts5 = TimeSeries(time_start='2000-03-24T20:32:54.000',
+                time_delta=7.1889609587E+01 * u.s,
+                data={'normalized flux': transit5})
+
+
+
+ts1_folded = ts1.fold(period=2397038*u.s, epoch_time='2000-01-01T01:16:00')
+ts2_folded = ts2.fold(period=2397038*u.s, epoch_time='2000-01-28T19:06:38')
+ts3_folded = ts3.fold(period=2397038*u.s, epoch_time='2000-02-25T12:57:16')
+ts4_folded = ts4.fold(period=2397038*u.s, epoch_time='2000-03-24T06:47:54')
+ts5_folded = ts5.fold(period=2397038*u.s, epoch_time='2000-04-21T00:38:32')
+
+
+pl.plot(ts1_folded.time.jd, ts1_folded['normalized flux'], 'r.', markersize=2, drawstyle='steps-pre',label="Transit 1")
+pl.plot(ts2_folded.time.jd, ts2_folded['normalized flux'], 'g.', markersize=2, drawstyle='steps-pre',label="Transit 2")
+pl.plot(ts3_folded.time.jd, ts3_folded['normalized flux'], 'y.', markersize=2, drawstyle='steps-pre',label="Transit 3")
+pl.plot(ts4_folded.time.jd, ts4_folded['normalized flux'], 'b.', markersize=2, drawstyle='steps-pre',label="Transit 4")
+pl.plot(ts4_folded.time.jd, ts4_folded['normalized flux'], 'm.', markersize=2, drawstyle='steps-pre',label="Transit 5")
+pl.legend()
+pl.show() 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
