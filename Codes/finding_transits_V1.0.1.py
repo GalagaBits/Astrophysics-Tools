@@ -55,15 +55,15 @@ pl.ylabel('Normalized Flux',fontname="Times New Roman")
 import pylab as pl
 
 a_1,a_2,a_3,a_4,a_5      = -0.00061,-0.00057,-0.00062,-0.00052,-0.00056
-w_1,w_2,w_3,w_4,w_5      =3.78e3,3e3,3.3e3,3.1e3,3.1e3
-x = np.linspace(-100000*7.1889609587E+01,100000*7.1889609587E+01,10000000)
+w_1,w_2,w_3,w_4,w_5      = 3.78e3,3e3,3.3e3,3.1e3,3.1e3
+x = np.linspace((-1000000*7.1889609587E+01),(1000000*7.1889609587E+01),1000000)
+folded_x = (x)
 
-
-pl.plot(x, gaussian(x,a_1,w_1,0), color="blue")
-pl.plot(x, gaussian(x,a_2,w_2,0), color="red")
-pl.plot(x, gaussian(x,a_3,w_3,0), color="yellow")
-pl.plot(x, gaussian(x,a_4,w_4,0), color="orange")
-pl.plot(x, gaussian(x,a_5,w_5,0), color="green")
+pl.plot(folded_x, gaussian(folded_x,a_1,w_1,0), color="blue")
+pl.plot(folded_x, gaussian(folded_x,a_2,w_2,0), color="red")
+pl.plot(folded_x, gaussian(folded_x,a_3,w_3,0), color="yellow")
+pl.plot(folded_x, gaussian(folded_x,a_4,w_4,0), color="orange")
+pl.plot(folded_x, gaussian(folded_x,a_5,w_5,0), color="green")
 
 pl.title('Period Folding of Gaussian Fit Transits', fontname="Times New Roman")
 pl.xlabel('Time (s)', fontname="Times New Roman")
@@ -71,7 +71,7 @@ pl.ylabel('Normalized Flux',fontname="Times New Roman")
 pl.show()
 
 #Overplot Observations
-#'''
+'''
 import pylab as pl
 from astropy.timeseries import TimeSeries
 
@@ -84,6 +84,8 @@ transit5 = yval[nearest_index(xval, 9570000):nearest_index(xval, 9610000)]
 
 orbital_period = 27.7435 #days
 
+
+print(folded_x)
 
 ts1 = TimeSeries(time_start='2000-01-01T00:00:00.000',
                 time_delta=7.1889609587E+01 * u.s,
@@ -128,7 +130,7 @@ pl.legend()
 pl.savefig("/Users/dealderod/Documents/GitHub/Astrophysics-Tools/Plots/Transits_Folding")
 
 pl.show() 
-#'''
+'''
 
 
 
