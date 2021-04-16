@@ -30,7 +30,23 @@ def transit_std(flux, t1, t2):
 
 def gaussian(xval, a, sigma, time):
     return (a*(np.exp(-np.log(2)*(((xval-time)**2)/((0.5*(sigma*np.sqrt(8*np.log(2))))**2)))))
+#Standard Deviation
 
+transit_std(yval, 0, 9.12E+3) #(normalized flux, start transit time, end transit time)
+
+#Plot of First Transit
+import pyspeckit
+import pylab as pl
+
+pl.cla()
+
+pl.errorbar(xval, yval, yerr=0.00005*1, fmt="o", color="black", alpha=0.13)
+pl.xlabel('Time (s)', fontname="Times New Roman")
+pl.ylabel('Normalized Flux',fontname="Times New Roman")
+
+pl.figure(figsize=(8,6))
+
+pl.show()
 
 #Interactive Gaussian Fit of Transits
 '''
@@ -51,7 +67,7 @@ pl.ylabel('Normalized Flux',fontname="Times New Roman")
 '''
 
 #Overplot Transits with Phase shifts
-
+'''
 import pylab as pl
 
 a_1,a_2,a_3,a_4,a_5      = -0.00061,-0.00057,-0.00062,-0.00052,-0.00056
@@ -69,7 +85,7 @@ pl.title('Period Folding of Gaussian Fit Transits', fontname="Times New Roman")
 pl.xlabel('Time (s)', fontname="Times New Roman")
 pl.ylabel('Normalized Flux',fontname="Times New Roman")
 pl.show()
-
+'''
 #Overplot Observations
 '''
 import pylab as pl
